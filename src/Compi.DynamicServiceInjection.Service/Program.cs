@@ -36,21 +36,10 @@ namespace Compi.DynamicServiceInjection.Service
 
 
                     var serviceNamespace = hostContext.Configuration.GetSection("ServiceNamespace").Value;
-
-                    //var assemblyPath = Directory.GetFiles(
-                    //    System.AppDomain.CurrentDomain.BaseDirectory, 
-                    //    $"*{namespaceDll}.dll", 
-                    //    SearchOption.AllDirectories).First();
-
-                    //var assembly = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromAssemblyPath(assemblyPath);
-
+                  
                     var assembly = Assembly.Load(serviceNamespace);
 
-                  
 
-
-                 
-                   
                     services.Scan(scan =>
                                   scan
                                   .FromAssemblies(assembly)
