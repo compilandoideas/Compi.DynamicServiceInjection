@@ -6,9 +6,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Compi.DynamicServiceInjection.Service
+namespace Compi.DynamicServiceInjection.Service.Extensions
 {
-    public static class ServiceRegistration
+    public static class ServiceRegistrationCollection
     {
         public static void AddService(this IServiceCollection services, IConfiguration configuration)
         {
@@ -66,13 +66,9 @@ namespace Compi.DynamicServiceInjection.Service
             if (IsHandlerInterface(parameterType))
                 return current;
 
-            object service = provider.GetService(parameterType);
-            if (service != null)
-                return service;
 
             throw new ArgumentException($"Type {parameterType} not found");
         }
-
 
         private static bool IsHandlerInterface(Type type)
         {
@@ -85,3 +81,4 @@ namespace Compi.DynamicServiceInjection.Service
         }
     }
 }
+

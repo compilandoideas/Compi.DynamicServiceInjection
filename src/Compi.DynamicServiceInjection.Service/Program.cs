@@ -1,5 +1,6 @@
 using Compi.DynamicServiceInjection.Common;
-using Scrutor;
+using Compi.DynamicServiceInjection.Service.Extensions;
+
 using System.Reflection;
 
 namespace Compi.DynamicServiceInjection.Service
@@ -34,33 +35,9 @@ namespace Compi.DynamicServiceInjection.Service
 
                     services.AddHostedService<Worker>();
 
-                    services.AddService(hostContext.Configuration);
-
-
-                    //var serviceNamespace = hostContext.Configuration.GetSection("ServiceNamespace").Value;
-
-                    //var assembly = Assembly.Load(serviceNamespace);
-
-                    //var typeFromConfigurationFile = assembly.GetType("Compi.DynamicServiceInjection.A.Service");
-
-                    //var serviceWithType = Activator.CreateInstance(typeFromConfigurationFile) as IService;
-                    //serviceWithType.Execute();
-
-                    //dynamic serviceIntance = Activator.CreateInstance(typeFromConfigurationFile);
-                    //serviceIntance.Execute();
-
-
-
-
-                    //services.Scan(scan =>
-                    //              scan
-                    //              .FromAssemblies(assembly)
-                    //              .AddClasses()
-                    //              .UsingRegistrationStrategy(RegistrationStrategy.Skip)
-                    //              .AsSelfWithInterfaces()         
-                    //              .WithSingletonLifetime()
-                    //          ) ;
-
+                    // services.AddService(hostContext.Configuration);
+                    services.AddServiceWithScrutor(hostContext.Configuration);
+                    //Tests(hostContext);
 
                 })
 
@@ -69,6 +46,25 @@ namespace Compi.DynamicServiceInjection.Service
             host.Run();
         }
 
+
+
+
+
+
+        private static void Tests(HostBuilderContext hostContext)
+        {
+            var serviceNamespace = hostContext.Configuration.GetSection("ServiceNamespace").Value;
+
+            var assembly = Assembly.Load(serviceNamespace);
+
+            var typeFromConfigurationFile = assembly.GetType("Compi.DynamicServiceInjection.A.Service");
+
+            var serviceWithType = Activator.CreateInstance(typeFromConfigurationFile) as IService;
+            serviceWithType.Execute();
+
+            dynamic serviceIntance = Activator.CreateInstance(typeFromConfigurationFile);
+            serviceIntance.Execute();
+        }
     }
       
 }
