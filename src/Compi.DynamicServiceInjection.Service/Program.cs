@@ -35,7 +35,7 @@ namespace Compi.DynamicServiceInjection.Service
                     services.AddHostedService<Worker>();
 
 
-                    var namespaceDll = hostContext.Configuration.GetSection("Namespace").Value;
+                    var serviceNamespace = hostContext.Configuration.GetSection("ServiceNamespace").Value;
 
                     //var assemblyPath = Directory.GetFiles(
                     //    System.AppDomain.CurrentDomain.BaseDirectory, 
@@ -44,7 +44,7 @@ namespace Compi.DynamicServiceInjection.Service
 
                     //var assembly = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromAssemblyPath(assemblyPath);
 
-                    var assembly = Assembly.Load(namespaceDll);
+                    var assembly = Assembly.Load(serviceNamespace);
 
                   
 
