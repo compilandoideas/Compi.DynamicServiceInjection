@@ -37,12 +37,18 @@ namespace Compi.DynamicServiceInjection.Service
 
                     var namespaceDll = hostContext.Configuration.GetSection("Namespace").Value;
 
-                    var assemblyPath = Directory.GetFiles(
-                        System.AppDomain.CurrentDomain.BaseDirectory, 
-                        $"*{namespaceDll}.dll", 
-                        SearchOption.AllDirectories).First();
-                    
-                    var assembly = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromAssemblyPath(assemblyPath);
+                    //var assemblyPath = Directory.GetFiles(
+                    //    System.AppDomain.CurrentDomain.BaseDirectory, 
+                    //    $"*{namespaceDll}.dll", 
+                    //    SearchOption.AllDirectories).First();
+
+                    //var assembly = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromAssemblyPath(assemblyPath);
+
+                    var assembly = Assembly.Load(namespaceDll);
+
+                  
+
+
                  
                    
                     services.Scan(scan =>
