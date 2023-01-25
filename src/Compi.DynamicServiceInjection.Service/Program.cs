@@ -76,7 +76,8 @@ namespace Compi.DynamicServiceInjection.Service
 			encoderSettings.AllowRange(UnicodeRanges.All);
 			var options = new JsonSerializerOptions
 			{
-				Encoder = JavaScriptEncoder.Create(encoderSettings)
+				Encoder = JavaScriptEncoder.Create(encoderSettings),
+				 WriteIndented= true
 			};
 			return options;
 		}
@@ -106,7 +107,7 @@ namespace Compi.DynamicServiceInjection.Service
 
 
 				var json = @"
-					
+						{
 							""data"" : [
 								{
 									""Id"" : 1,
@@ -117,21 +118,21 @@ namespace Compi.DynamicServiceInjection.Service
 									""TypeEvent"" : ""aqwe""
 								}
 							]							
-						";
+						}";
 
 
 
 				Type? type = Assembly.GetAssembly(typeof(DataResult))?.GetType("Compi.DynamicServiceInjection.Service.DataContracts.DataResult");
 
-				var obj = new DataResult();
-				var type2 = obj.GetType().FullName;
+				//var obj = new DataResult();
+				//var type2 = obj.GetType().FullName;
 
 			
 
 				var deserializedObject = JsonSerializer.Deserialize(json, type, options);
 
 
-				Console.WriteLine(JsonSerializer.Serialize(deserializedObject, new JsonSerializerOptions { WriteIndented = true }));
+				Console.WriteLine(JsonSerializer.Serialize(deserializedObject, options ));
 			}
 			catch (Exception ex)
 			{

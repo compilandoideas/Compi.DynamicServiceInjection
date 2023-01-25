@@ -11,10 +11,10 @@ namespace Compi.DynamicServiceInjection.Service.DataContracts
 	{
 		public List<DataEvent> data { get; set; }
 
-		public DataResult()
-		{
+		//public DataResult()
+		//{
 
-		}
+		//}
 	}
 
 
@@ -24,11 +24,11 @@ namespace Compi.DynamicServiceInjection.Service.DataContracts
 		public string TypeEvent { get; set; }
 
 
-		public DataEvent(int id, string typeEvent)
-		{
-			Id = id;
-			TypeEvent = typeEvent;
+		//public DataEvent(int id, string typeEvent)
+		//{
+		//	Id = id;
+		//	TypeEvent = typeEvent;
 
-		}
+		//}
 	}
 }
